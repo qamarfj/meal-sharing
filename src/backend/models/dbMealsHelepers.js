@@ -35,4 +35,17 @@ module.exports = {
       return { success: true, message: "ok" };
     }
   },
+  getMealBymaxPrice: async (maxPrice) => {
+    return await knex("meals").select("*").where("price", "<", maxPrice);
+  },
+  getMealCreatedAfter: async (startDate) => {
+    return await knex("meals").where(
+      "created_date",
+      ">",
+      Date.parse(startDate)
+    );
+  },
+  getAllMealsByLimit: async (limit) => {
+    return await knex("meals").limit(limit);
+  },
 };
