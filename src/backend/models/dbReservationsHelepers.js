@@ -1,42 +1,38 @@
 const knex = require("../database");
 module.exports = {
   getAllReservations: async () => {
-    return await knex("reservations");
+    return await knex("reservations").select("*");
   },
   getReservationById: async (id) => {
-    return await knex("reservations").where("id", "=", id);
+    return await knex("reservations").select("*").where("id", "=", id);
   },
   addReservation: async (reservation) => {
-    await knex("reservations").insert(reservation);
-    return { success: true, message: "ok" }; // respond back to request
+    const addedReservationsId = await knex("reservations").insert(reservation);
+    // respond back with added reservation
+    return await knex("reservations")
+      .select("*")
+      .where("id", "=", addedReservationsId[0]);
   },
-  updateReservation: async (id, updateFields) => {
-    const reservation = await knex("reservations")
-      .select("id")
+
+  updateReservation: async (id, reservationToUpdate) => {
+    const oldReservation = await knex("reservations")
+      .select("*")
       .where("id", "=", id);
-    //if reservation dosenot exists
-    if (!reservation) {
-      return "do not exist";
-    } else {
+
+    if (oldReservation.length > 0) {
       await knex("reservations")
-        .update("title", updateFields.title)
-        .where("id", reservation[0].id);
-
-      return { success: true, message: "ok" };
+        .update(reservationToUpdate)
+        .where("id", oldReservation[0].id);
+      const updatedReservation = await knex("reservations")
+        .select("*")
+        .where("id", "=", id);
+      return updatedReservation;
+    } else {
+      return "id does not exist";
     }
   },
+
   removeReservation: async (id) => {
-    const reservation = await knex("reservations")
-      .select("id")
-      .where("id", "=", id);
-
-    //if reservation dosenot exists
-    if (!reservation) {
-      return "do not exist";
-    } else {
-      await knex("reservations").where("id", "=", id).del();
-
-      return { success: true, message: "ok" };
-    }
+    return await knex("reservations").where("id", "=", id).del();
   },
 };

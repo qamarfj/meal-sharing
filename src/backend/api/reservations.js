@@ -6,12 +6,10 @@ const dbReservationsHeleper = require("../models/dbReservationsHelepers");
 
 router.get("/", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
     const reservations = await dbReservationsHeleper.getAllReservations();
-
     response.json(reservations);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 router.get("/:id", async (request, response) => {
@@ -21,48 +19,40 @@ router.get("/:id", async (request, response) => {
     );
     response.json(reservations);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 
 router.post("/", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const addStatus = await dbReservationsHeleper.addReservation(request.body);
-    response.json(addStatus);
+    const addedReservation = await dbReservationsHeleper.addReservation(
+      request.body
+    );
+    response.json(addedReservation);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 router.put("/:id", async (request, response) => {
   try {
-    if (request.params.id) {
-      const id = request.params.id;
-      const updateFields = request.body;
-      const updateStatus = await dbReservationsHeleper.updateReservation(
-        id,
-        updateFields
-      );
-      // select meal with id
-      response.json(updateStatus);
-    } else response.send("enter id");
+    const id = request.params.id;
+    const reservationToUpdate = request.body;
+    const updatedReservation = await dbReservationsHeleper.updateReservation(
+      id,
+      reservationToUpdate
+    );
 
-    //response.json(request.body);
-    // knex syntax for selecting things. Look up the documentation for knex for further info
+    response.json(updatedReservation);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 router.delete("/:id", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const deleteStatus = await dbReservationsHeleper.removeReservation(
-      request.params.id
-    );
-
-    response.json(deleteStatus); // respond back to request
+    await dbReservationsHeleper.removeReservation(request.params.id);
+    response.status(204).json({}); // respond back to request
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 module.exports = router;

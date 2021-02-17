@@ -7,18 +7,16 @@ const dbReservationsHeleper = require("../models/dbReservationsHelepers");
 
 router.get("/", queryHandler, async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
     const meals = await dbMealsHelepers.getAllMeals();
     response.json(meals);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 
 async function queryHandler(request, response, next) {
   if (Object.entries(request.query).length === 0) {
-    next();
-    return;
+    return next();
   } else {
     let meals;
     let key = Object.keys(request.query)[0]; // "plainKey"
@@ -40,6 +38,11 @@ async function queryHandler(request, response, next) {
           meals = await dbMealsHelepers.getAllMealsByLimit(value);
         else response.sendStatus(400);
         break;
+      case "availableReservations":
+        if (value === "true")
+          meals = await dbMealsHelepers.getMealsavailableReservations();
+        else response.sendStatus(400);
+        break;
     }
     response.json(meals);
     return;
@@ -51,56 +54,42 @@ router.get("/:id", async (request, response) => {
     const meals = await dbMealsHelepers.getMealById(request.params.id);
     response.json(meals);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 
 router.post("/", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const addStatus = await dbMealsHelepers.addMeal(request.body);
-    response.json(addStatus);
+    const addedMeal = await dbMealsHelepers.addMeal(request.body);
+    response.json(addedMeal);
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 router.put("/:id", async (request, response) => {
   try {
     if (request.params.id) {
       const id = request.params.id;
-      const updateFields = request.body;
-      const updateStatus = await dbMealsHelepers.updateMeal(id, updateFields);
-      // select meal with id
-      response.json(updateStatus);
+      const updateMeal = request.body;
+      const updatedmeal = await dbMealsHelepers.updateMeal(id, updateMeal);
+      response.json(updatedmeal);
     } else response.send("enter id");
-
-    //response.json(request.body);
-    // knex syntax for selecting things. Look up the documentation for knex for further info
   } catch (error) {
-    throw error;
+    response.status(400).json(error);
   }
 });
 router.delete("/:id", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const deleteStatus = await dbMealsHelepers.removeMeal(request.params.id);
-
-    response.json(deleteStatus); // respond back to request
-  } catch (error) {
-    throw error;
+    await dbMealsHelepers.removeMeal(request.params.id);
+    return response.status(204).json({});
+  } catch (err) {
+    if (err) {
+      console.log(err);
+      return response.status(400).send(err);
+    } else {
+      return next(err);
+    }
   }
 });
-//GET api/meals/ query parameters
-//maxPrice	Get meals that has a price smaller than maxPrice	Number	api/meals?maxPrice=90
-/*router.get("/:id", async (request, response) => {
-  try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const deleteStatus = await dbMealsHelepers.removeMeal(request.params.id);
 
-    response.json(deleteStatus); // respond back to request
-  } catch (error) {
-    throw error;
-  }
-});
-*/
 module.exports = router;

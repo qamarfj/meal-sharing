@@ -1,38 +1,29 @@
 const knex = require("../database");
 module.exports = {
   getAllReviews: async () => {
-    return await knex("reviews");
+    return await knex("reviews").select("*");
   },
   getReviewById: async (id) => {
-    return await knex("reviews").where("id", "=", id);
+    const reviews = await knex("reviews").select("*").where("id", "=", id);
+    return reviews[0];
   },
   addReview: async (review) => {
-    await knex("reviews").insert(review);
-    return { success: true, message: "ok" }; // respond back to request
+    const addedReviewsId = await knex("reviews").insert(review);
+    const addedReview = await knex("reviews")
+      .select("*")
+      .where("id", "=", addedReviewsId[0]);
+    return addedReview; // respond back to request
   },
-  updateReview: async (id, updateFields) => {
+  updateReview: async (id, updateReview) => {
     const review = await knex("reviews").select("id").where("id", "=", id);
-    //if review dosenot exists
-    if (!review) {
-      return "do not exist";
+    if (review.length > 0) {
+      await knex("reviews").update(updateReview).where("id", review[0].id);
+      return await knex("reviews").select("*").where("id", "=", id);
     } else {
-      await knex("reviews")
-        .update("title", updateFields.title)
-        .where("id", review[0].id);
-
-      return { success: true, message: "ok" };
+      return "do not exist";
     }
   },
   removeReview: async (id) => {
-    const review = await knex("reviews").select("id").where("id", "=", id);
-
-    //if review dosenot exists
-    if (!review) {
-      return "do not exist";
-    } else {
-      await knex("reviews").where("id", "=", id).del();
-
-      return { success: true, message: "ok" };
-    }
+    return await knex("reviews").where("id", "=", id).del();
   },
 };

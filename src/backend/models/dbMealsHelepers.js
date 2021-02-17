@@ -1,3 +1,4 @@
+const { select } = require("../database");
 const knex = require("../database");
 module.exports = {
   getAllMeals: async () => {
@@ -5,35 +6,6 @@ module.exports = {
   },
   getMealById: async (id) => {
     return await knex("meals").select("*").where("id", "=", id);
-  },
-  addMeal: async (meal) => {
-    await knex("meals").insert(meal);
-    return { success: true, message: "ok" }; // respond back to request
-  },
-  updateMeal: async (id, updateFields) => {
-    const meal = await knex("meals").select("id").where("id", "=", id);
-    //if meal dosenot exists
-    if (!meal) {
-      return "do not exist";
-    } else {
-      await knex("meals")
-        .update("title", updateFields.title)
-        .where("id", meal[0].id);
-
-      return { success: true, message: "ok" };
-    }
-  },
-  removeMeal: async (id) => {
-    const meal = await knex("meals").select("id").where("id", "=", id);
-
-    //if meal dosenot exists
-    if (!meal) {
-      return "do not exist";
-    } else {
-      await knex("meals").where("id", "=", id).del();
-
-      return { success: true, message: "ok" };
-    }
   },
   getMealBymaxPrice: async (maxPrice) => {
     return await knex("meals").select("*").where("price", "<", maxPrice);
@@ -47,5 +19,45 @@ module.exports = {
   },
   getAllMealsByLimit: async (limit) => {
     return await knex("meals").limit(limit);
+  },
+  getMealsavailableReservations: async () => {
+    return await knex
+      .select("meals.*")
+      .from("meals")
+      .join(
+        knex("meals")
+          .select({ id: "meals.id" }, "meals.max_reservations")
+          .from("meals")
+          .join("reservations", function () {
+            this.on("meals.id", "=", "reservations.meal_id");
+          })
+          .sum({ sum: ["reservations.number_of_guests"] })
+          .groupBy("meals.id")
+          .as("M_R"),
+        function () {
+          this.on("M_R.id", "=", "meals.id")
+            .andOn("meals.max_reservations", ">", "M_R.sum")
+            .andOn("meals.when", ">", Date.now());
+        }
+      );
+  },
+  addMeal: async (meal) => {
+    const addedMealsId = await knex("meals").insert(meal);
+    // respond back with added meal
+    return await knex("meals").select("*").where("id", "=", addedMealsId[0]);
+  },
+  updateMeal: async (id, updateMeal) => {
+    const meal = await knex("meals").select("id").where("id", "=", id);
+    //if meal dosenot exists
+    if (meal.length > 0) {
+      await knex("meals").update(updateMeal).where("id", meal[0].id);
+      const updatedmeal = await knex("meals").select("*").where("id", "=", id);
+      return updatedmeal;
+    } else {
+      return "id does not exist";
+    }
+  },
+  removeMeal: async (id) => {
+    return await knex("meals").where("id", "=", id).del();
   },
 };
