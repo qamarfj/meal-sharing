@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://www.hackyourfuture.dk/static/logo-dark.svg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">reservation sharing api</h3>
+<h3 align="center">Meal sharing api</h3>
 
 <div align="center">
 
@@ -32,19 +32,21 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Link to deployed website:
+Link to deployed website: 
 
 This project will be built out over 3 different classes:
 
 - **Nodejs week 3** - Here you will be building the backend api. Meaning you will work in the `src/backend` folder.
 - **React week 5** - Here you will be building the frontend components and routing. In this week you will be working in the `src/client` folder.
-- **meal sharing class** - After week 5 of react you will have a specific class for finishing the reservation sharing website. Here you will make everything work and deploy the website to the internet
+- **Meal sharing class** - After week 5 of react you will have a specific class for finishing the meal sharing website. Here you will make everything work and deploy the website to the internet
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
+
 
 ## Deployment <a name = "deployment"></a>
 
 Check here how to depoly an app on Heroku https://github.com/HackYourFuture-CPH/node.js/blob/master/deployment.md and watch this video https://www.youtube.com/watch?v=A9ZcSOc7hCw
+
 
 ### Environment variables
 
@@ -65,7 +67,7 @@ To install run `npm install`
 
 To run `npm run dev`
 
-The api can now be found on `http://localhost:3000/api/` an example is `http://localhost:3000/api/reservations`
+The api can now be found on `http://localhost:3000/api/` an example is `http://localhost:3000/api/meals`
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
