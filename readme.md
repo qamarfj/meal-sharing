@@ -14,7 +14,7 @@
 
 ---
 
-<p align="center"> Website api for sharing reservations together. Invite your best friends or your family for dinner!
+<p align="center"> Website api for sharing meals together. Invite your best friends or your family for dinner!
     <br> 
 </p>
 
@@ -38,7 +38,7 @@ This project will be built out over 3 different classes:
 
 - **Nodejs week 3** - Here you will be building the backend api. Meaning you will work in the `src/backend` folder.
 - **React week 5** - Here you will be building the frontend components and routing. In this week you will be working in the `src/client` folder.
-- **reservation sharing class** - After week 5 of react you will have a specific class for finishing the reservation sharing website. Here you will make everything work and deploy the website to the internet
+- **meal sharing class** - After week 5 of react you will have a specific class for finishing the reservation sharing website. Here you will make everything work and deploy the website to the internet
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
