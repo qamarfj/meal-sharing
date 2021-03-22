@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from "./components/HomeComponent/Header";
+import Home from "./components/HomeComponent/Home";
 import TestComponent from "./components/TestComponent/TestComponent";
-
+import "./App.css";
+import Footer from "./components/HomeComponent/Footer";
+import Meals from "./components/HomeComponent/Meals";
+import Meal from "./components/HomeComponent/Meal";
 function App() {
+  const [meals, setMeals] = useState([]);
+  useEffect(() => {
+    fetch("/api/meals")
+      .then((response) => response.json())
+      .then((meals) => {
+        setMeals(meals);
+      });
+  }, []);
+
   return (
-    <Router>
-      <Route exact path="/">
-        <p>test</p>
-      </Route>
-      <Route exact path="/lol">
-        <p>lol</p>
-      </Route>
-      <Route exact path="/test-component">
-        <TestComponent></TestComponent>
-      </Route>
-    </Router>
+    <>
+      <Router>
+        <Header />
+
+        <Route exact path="/">
+          <Home meals={meals} />
+        </Route>
+        <Route exact path="/meals">
+          <Meals meals={meals} />
+        </Route>
+        <Route exact path="/meals/:id">
+          <Meal meals={meals} />
+        </Route>
+        <Route exact path="/test-component">
+          <TestComponent></TestComponent>
+        </Route>
+        <Footer />
+      </Router>
+    </>
   );
 }
 
