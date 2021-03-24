@@ -2,12 +2,25 @@
   box-sizing: border-box;
   text-align: center;
 }
+.main {
+  background-color: green;
+}
+.heading {
+  background-color: rgb(123, 255, 0);
+}
 .header,
 .footer {
   color: white;
-  background-color: red;
+  background-color: rgb(21, 66, 12);
   max-height: 3em;
 }
-.main {
+
+.naveBar {
+  color: rgb(15, 3, 59);
+  margin-left: 1em;
+  color: white;
+}
+.naveBar:hover {
+  font-weight: bold;
   background-color: green;
 }

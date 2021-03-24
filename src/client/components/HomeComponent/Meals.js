@@ -11,7 +11,9 @@ export default function Meals({ meals }) {
           return (
             <div key={meal.id}>
               <h3>{meal.title}</h3>
-              <Link to={`/meals/${meal.id}`}>Detail</Link>
+              <Link to={`/meals/${meal.id}`} className="naveBar">
+                Detail
+              </Link>
               <hr />
             </div>
           );

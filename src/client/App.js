@@ -7,6 +7,7 @@ import "./App.css";
 import Footer from "./components/HomeComponent/Footer";
 import Meals from "./components/HomeComponent/Meals";
 import Meal from "./components/HomeComponent/Meal";
+import Nave from "./components/HomeComponent/Nave";
 function App() {
   const [meals, setMeals] = useState([]);
   useEffect(() => {
@@ -21,19 +22,21 @@ function App() {
     <>
       <Router>
         <Header />
-
-        <Route exact path="/">
-          <Home meals={meals} />
-        </Route>
-        <Route exact path="/meals">
-          <Meals meals={meals} />
-        </Route>
-        <Route exact path="/meals/:id">
-          <Meal meals={meals} />
-        </Route>
-        <Route exact path="/test-component">
-          <TestComponent></TestComponent>
-        </Route>
+        <Nave />
+        <Switch>
+          <Route exact path="/">
+            <Home meals={meals} />
+          </Route>
+          <Route exact path="/meals">
+            <Meals meals={meals} />
+          </Route>
+          <Route exact path="/meals/:id">
+            <Meal meals={meals} />
+          </Route>
+          <Route exact path="/test-component">
+            <TestComponent></TestComponent>
+          </Route>
+        </Switch>
         <Footer />
       </Router>
     </>

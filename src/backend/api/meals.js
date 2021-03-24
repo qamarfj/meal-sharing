@@ -39,9 +39,11 @@ async function queryHandler(request, response, next) {
         else response.sendStatus(400);
         break;
       case "availableReservations":
-        if (value === "true")
-          meals = await dbMealsHelepers.getMealsavailableReservations();
-        else response.sendStatus(400);
+        if (value === "true") {
+          let current = new Date().toISOString();
+          current = current.toString();
+          meals = await dbMealsHelepers.getMealsavailableReservations(current);
+        } else response.sendStatus(400);
         break;
     }
     response.json(meals);
