@@ -17,6 +17,10 @@ export default function Meals({ meals }) {
               <h3>{meal.title}</h3>
               <Link to={`/meals/${meal.id}`} className="naveBar">
                 Detail
+              </Link>{" "}
+              : :{" "}
+              <Link to={`/mealreviews/${meal.id}`} className="naveBar">
+                Add Reviews to this Meal
               </Link>
               <hr />
             </div>

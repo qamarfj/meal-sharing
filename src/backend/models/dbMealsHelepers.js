@@ -5,6 +5,11 @@ module.exports = {
   getAllMeals: async () => {
     return await knex("meals").select("*");
   },
+  getMealByTitle: async (title) => {
+    return await knex("meals")
+      .select("*")
+      .where("title", "like", `% ${title}%`);
+  },
   getMealById: async (id) => {
     return await knex("meals").select("*").where("id", "=", id);
   },

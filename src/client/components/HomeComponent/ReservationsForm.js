@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-export default function ReservationsForm({ id, upateShowForm }) {
+export default function ReservationsForm({ id, updateShowForm }) {
   const reservation = {
     number_of_guests: 1,
     meal_id: id,
@@ -24,7 +24,7 @@ export default function ReservationsForm({ id, upateShowForm }) {
       reservation.contact_name = values.name;
       saveReservation().then((data) => {
         alert(JSON.stringify(data));
-        upateShowForm();
+        updateShowForm();
       });
     },
     validationSchema: checkoutSchema,

@@ -22,6 +22,10 @@ async function queryHandler(request, response, next) {
     let key = Object.keys(request.query)[0]; // "plainKey"
     let value = Object.values(request.query)[0]; // "plain value"
     switch (key) {
+      case "title":
+        meals = await dbMealsHelepers.getMealByTitle(value);
+
+        break;
       case "maxPrice":
         if (parseInt(value) >= 0)
           meals = await dbMealsHelepers.getMealBymaxPrice(value);

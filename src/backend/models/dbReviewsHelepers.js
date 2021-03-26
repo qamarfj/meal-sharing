@@ -1,7 +1,11 @@
 const knex = require("../database");
 module.exports = {
-  getAllReviews: async () => {
-    return await knex("reviews").select("*");
+  getAllReviews: async (id) => {
+    if (id) {
+      return await knex("reviews").select("*").where("meal_id", "=", id);
+    } else {
+      return await knex("reviews").select("*");
+    }
   },
   getReviewById: async (id) => {
     const reviews = await knex("reviews").select("*").where("id", "=", id);
