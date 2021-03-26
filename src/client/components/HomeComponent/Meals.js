@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import AutoComplete from "./AutoComplete";
 
 export default function Meals({ meals }) {
   return (
     <div className="main">
+      <div className="searchBar">
+        <AutoComplete meals={meals} />
+      </div>
       <h3>All Meals</h3>
       <hr />
       {meals &&

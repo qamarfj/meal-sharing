@@ -43,11 +43,17 @@ button {
     padding-left: 1%;
     padding-right: 1%;
   }
+  .searchBar {
+    margin-left: 25em;
+  }
 }
 
 @media screen and (max-width: 750px) {
   #root {
     padding-left: 0;
     padding-right: 0;
+  }
+  .searchBar {
+    margin-left: auto;
   }
 }

@@ -8,8 +8,10 @@ import Footer from "./components/HomeComponent/Footer";
 import Meals from "./components/HomeComponent/Meals";
 import Meal from "./components/HomeComponent/Meal";
 import Nave from "./components/HomeComponent/Nave";
+import AutoComplete from "./components/HomeComponent/AutoComplete";
 function App() {
   const [meals, setMeals] = useState([]);
+
   useEffect(() => {
     fetch("/api/meals")
       .then((response) => response.json())

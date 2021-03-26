@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ReservationsForm from "./ReservationsForm";
+
 export default function Meal({ meals }) {
   const [meal, setMeal] = useState();
   const [showForm, setShowForm] = useState(false);
@@ -31,7 +32,7 @@ export default function Meal({ meals }) {
     setShowForm(false);
   };
   return (
-    <div>
+    <div className="container">
       {meal && (
         <>
           <h1>Meal Detail</h1>
