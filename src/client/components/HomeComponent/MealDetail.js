@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+//"../../../../../public/meal.jfif"
 export default function MealDetail({ meal }) {
   return (
     <>
       <Link to={`/meals/${meal.id}`} className="naveBar">
-        <img src="../../../../../public/meal.jfif" alt="meal image" />
+        <img src="https://i.ibb.co/dDYTpHQ/meal.jpg" alt="meal" />
       </Link>
       <div key={meal.id}>
         <h3>{meal.title}</h3>
