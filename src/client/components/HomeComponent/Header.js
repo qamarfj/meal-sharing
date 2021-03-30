@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nave from "./Nave";
 
-const image = "../../../../../public/banner.jpg";
+const banner_url = "https://i.ibb.co/4ZdRwPG/banner.jpg";
 export default function Header({ setMeals }) {
   const [search, setSearch] = useState("");
 
@@ -37,7 +37,7 @@ export default function Header({ setMeals }) {
         </div>
       </div>
       <div>
-        <img src={image} alt="banner image" width="100%" height="300em" />
+        <img src={banner_url} alt="banner image" width="100%" height="300em" />
         <hr />
       </div>
     </>
