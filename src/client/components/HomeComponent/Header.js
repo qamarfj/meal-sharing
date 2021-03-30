@@ -37,7 +37,7 @@ export default function Header({ setMeals }) {
         </div>
       </div>
       <div>
-        <img src={image} width="100%" height="300em"></img>
+        <img src={image} alt="banner image" width="100%" height="300em" />
         <hr />
       </div>
     </>
