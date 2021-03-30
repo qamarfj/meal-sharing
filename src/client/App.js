@@ -6,7 +6,6 @@ import "./App.css";
 import Footer from "./components/HomeComponent/Footer";
 import Meals from "./components/HomeComponent/Meals";
 import Meal from "./components/HomeComponent/Meal";
-import Nave from "./components/HomeComponent/Nave";
 import Reviews from "./components/HomeComponent/Reviews";
 import MealReviews from "./components/HomeComponent/MealReviews";
 import AddMeal from "./components/HomeComponent/AddMeal";
@@ -18,7 +17,8 @@ function App() {
     fetch("/api/meals")
       .then((response) => response.json())
       .then((meals) => {
-        setMeals(meals);
+        setMeals(meals.reverse());
+
         if (addedNewMeal) setAddedNewmeal(false);
       });
   }, [addedNewMeal]);

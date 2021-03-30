@@ -29,7 +29,7 @@ export default function MealReviews() {
       {reviews.length > 0 ? (
         reviews.map((review) => {
           return (
-            <>
+            <div key={review.id}>
               <div>
                 id: {review.id} Meal ID: {review.meal_id} Title: {review.title}
               </div>
@@ -37,7 +37,7 @@ export default function MealReviews() {
               <div>stars : {review.stars}</div>
               <div>Created Date: {review.created_date}</div>
               <hr />
-            </>
+            </div>
           );
         })
       ) : (

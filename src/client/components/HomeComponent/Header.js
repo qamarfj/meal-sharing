@@ -6,13 +6,11 @@ export default function Header({ setMeals }) {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (search !== "") {
-      fetch(`/api/meals?title=${search}`)
-        .then((response) => response.json())
-        .then((meals) => {
-          setMeals(meals);
-        });
-    }
+    fetch(`/api/meals?title=${search}`)
+      .then((response) => response.json())
+      .then((meals) => {
+        setMeals(meals.reverse());
+      });
   }, [search]);
 
   const onChangeHandler = (e) => {

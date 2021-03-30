@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//"../../../../../public/meal.jfif"
 export default function MealDetail({ meal }) {
   return (
     <>
