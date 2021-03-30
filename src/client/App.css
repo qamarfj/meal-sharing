@@ -2,27 +2,56 @@
   box-sizing: border-box;
   text-align: center;
 }
-.main {
-  background-color: green;
-}
-.heading {
-  background-color: rgb(123, 255, 0);
-}
-.header,
-.footer {
+
+.header {
+  display: flex;
+  width: 100%;
+  background-color: rgb(66, 65, 65);
+  justify-content: space-between;
   color: white;
-  background-color: rgb(21, 66, 12);
-  max-height: 3em;
+}
+.logo {
+  width: 30%;
+  text-align: center;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 50%;
 }
 
 .naveBar {
-  color: rgb(218, 214, 37);
+  font-weight: bold;
   margin-left: 1em;
+  color: rgb(5, 148, 5);
+  text-decoration: none;
 }
 .naveBar:hover {
   font-weight: bold;
-  background-color: green;
+  background-color: rgb(175, 197, 114);
 }
 .container {
   min-height: 70vh;
+}
+.main {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.main img {
+  width: 30%;
+  height: 40%;
+}
+.meal-text {
+  width: 50%;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  background-color: rgb(66, 65, 65);
+  justify-content: space-between;
+  color: white;
+  padding: 1em;
 }

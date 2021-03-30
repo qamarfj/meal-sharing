@@ -1,24 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AutoComplete from "./AutoComplete";
+import MealDetail from "./MealDetail";
 
 export default function Meals({ meals }) {
   return (
     <div className="main">
-      <div className="searchBar">
-        <AutoComplete meals={meals} />
-      </div>
-      <h3>All Meals</h3>
-      <hr />
       {meals &&
         meals.map((meal) => {
           return (
-            <div key={meal.id}>
-              <h3>{meal.title}</h3>
-              <Link to={`/meals/${meal.id}`} className="naveBar">
-                Detail
-              </Link>{" "}
-              : :{" "}
+            <div className="meal-text" key={meal.id}>
+              <MealDetail meal={meal} />
               <Link to={`/mealreviews/${meal.id}`} className="naveBar">
                 Add Reviews to this Meal
               </Link>

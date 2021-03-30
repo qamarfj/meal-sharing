@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // @ts-ignore
-import style from "./Nave.module.css";
 export default function Nave() {
   return (
-    <div className={style.backgroundColor}>
+    <div className="navBar1">
       <Link to={"/"} className="naveBar">
         Home
       </Link>

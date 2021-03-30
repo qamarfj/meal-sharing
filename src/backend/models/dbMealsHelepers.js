@@ -41,18 +41,18 @@ module.exports = {
           .groupBy("meals.id")
           .as("M_R"),
         function () {
-          this.on("M_R.id", "=", "meals.id").andOn(
-            "meals.max_reservations",
-            ">",
-            "M_R.sum"
-          );
+          this.on("meals.max_reservations", ">", "M_R.sum");
+          // this.on("M_R.id", "=", "meals.id").andOn(
+          //   "meals.max_reservations",
+          //   ">",
+          //   "M_R.sum"
+          // );
         }
       );
-
     const mealsRes = meals.filter((meal) => {
       const mealDate = meal.when;
-      const mealDateString = mealDate.toString();
-      return Date.parse(mealDateString) > Date.parse(current);
+      const mealDateString = Number(mealDate);
+      return mealDateString > Date.parse(current);
     });
     return mealsRes;
   },

@@ -26,8 +26,8 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
-        <Nave />
+        <Header meals={meals} setMeals={setMeals} />
+
         <Switch>
           <Route exact path="/">
             <Home meals={meals} />

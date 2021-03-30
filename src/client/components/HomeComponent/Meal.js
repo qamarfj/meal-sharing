@@ -6,16 +6,18 @@ import ReservationsForm from "./ReservationsForm";
 export default function Meal({ meals }) {
   const [meal, setMeal] = useState({});
   const [showForm, setShowForm] = useState(false);
-  const [available, setAvailable] = useState(false);
+  const [available, setAvailable] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     fetch("/api/meals?availableReservations=true")
       .then((response) => response.json())
       .then((meals) => {
-        const availableMeals = meals.find((meal) => meal.id.toString() === id);
+        const availableMeals = meals.find(
+          (meal) => Number(meal.id) === Number(id)
+        );
         if (availableMeals) {
-          setAvailable(meals);
+          setAvailable(availableMeals);
         }
       });
   }, []);
@@ -44,7 +46,11 @@ export default function Meal({ meals }) {
             Date: {meal.when} Max. Reservations: {meal.max_reservations} Price :{" "}
             {meal.price} kr.
           </div>
-          {available && <button onClick={submitHandler}>Reservar Table</button>}
+          {available ? (
+            <button onClick={submitHandler}>Reservar Table</button>
+          ) : (
+            <div>Fully Booked</div>
+          )}
         </>
       )}
       {showForm && (
