@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import AutoComplete from "./AutoComplete";
-import Meal from "./Meal";
+import React from "react";
 import MealDetail from "./MealDetail";
 
 export default function Home({ meals }) {

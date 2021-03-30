@@ -5,7 +5,7 @@ export default function MealDetail({ meal }) {
   return (
     <>
       <Link to={`/meals/${meal.id}`} className="naveBar">
-        <img src="../../../../../public/1.jfif"></img>
+        <img src="../../../../../public/meal.jfif"></img>
       </Link>
       <div key={meal.id}>
         <h3>{meal.title}</h3>
