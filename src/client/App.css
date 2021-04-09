@@ -6,7 +6,7 @@
 .header {
   display: flex;
   width: 100%;
-  background-color: rgb(66, 65, 65);
+  background-color: rgb(178, 243, 176);
   justify-content: space-between;
   color: white;
 }
@@ -36,22 +36,35 @@
 }
 .main {
   display: flex;
-  width: 100%;
+
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .main img {
-  width: 30%;
-  height: 40%;
+  width: 90%;
+  height: 100%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
 }
 .meal-text {
-  width: 50%;
+  display: flex;
+  width: 40%;
+  margin: 1em;
+  border: solid 3px #0d8f34;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 1);
+  flex-direction: column;
+  background-color: #83f0ac;
 }
 
 .footer {
   display: flex;
   width: 100%;
-  background-color: rgb(66, 65, 65);
+  background-color: rgb(154, 190, 9);
   justify-content: space-between;
   color: white;
   padding: 1em;
+}
+/* @import url("https://cdn.syncfusion.com/ej2/material.css"); */
+.search {
+  width: 50%;
+  margin-left: 25em;
 }

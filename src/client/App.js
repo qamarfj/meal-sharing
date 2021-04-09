@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header meals={meals} setMeals={setMeals} />
+        <Header />
 
         <Switch>
           <Route exact path="/">
