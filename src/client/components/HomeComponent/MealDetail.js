@@ -4,7 +4,8 @@ export default function MealDetail({ meal }) {
   return (
     <>
       <div>
-        <img src="https://i.ibb.co/dDYTpHQ/meal.jpg" alt="meal" />
+        {/* <img src="https://i.ibb.co/dDYTpHQ/meal.jpg" alt="meal" /> */}
+        <img src="src\client\assets\images\hyf.png" alt="meal" />
       </div>
       <div key={meal.id}>
         <Link to={`/meals/${meal.id}`} className="naveBar">
