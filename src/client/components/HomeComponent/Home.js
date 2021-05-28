@@ -1,7 +1,9 @@
 import React from "react";
 import AutoComplete from "./AutoComplete";
 
-const meal = "https://i.ibb.co/b3sRTSN/meal4.jpg";
+//const meal = "https://i.ibb.co/b3sRTSN/meal4.jpg";
+const meal = "src/client/assets/images/banner.jpg";
+
 export default function Home({ meals }) {
   return (
     <>
