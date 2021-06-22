@@ -32,8 +32,8 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Link to deployed website: 
-
+Link to deployed website:
+https://sharemeals.herokuapp.com/
 This project will be built out over 3 different classes:
 
 - **Nodejs week 3** - Here you will be building the backend api. Meaning you will work in the `src/backend` folder.
@@ -42,11 +42,9 @@ This project will be built out over 3 different classes:
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-
 ## Deployment <a name = "deployment"></a>
 
 Check here how to depoly an app on Heroku https://github.com/HackYourFuture-CPH/node.js/blob/master/deployment.md and watch this video https://www.youtube.com/watch?v=A9ZcSOc7hCw
-
 
 ### Environment variables
 

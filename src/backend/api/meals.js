@@ -22,6 +22,10 @@ async function queryHandler(request, response, next) {
     let key = Object.keys(request.query)[0]; // "plainKey"
     let value = Object.values(request.query)[0]; // "plain value"
     switch (key) {
+      case "title":
+        meals = await dbMealsHelepers.getMealByTitle(value);
+
+        break;
       case "maxPrice":
         if (parseInt(value) >= 0)
           meals = await dbMealsHelepers.getMealBymaxPrice(value);
@@ -39,9 +43,11 @@ async function queryHandler(request, response, next) {
         else response.sendStatus(400);
         break;
       case "availableReservations":
-        if (value === "true")
-          meals = await dbMealsHelepers.getMealsavailableReservations();
-        else response.sendStatus(400);
+        if (value === "true") {
+          let current = new Date().toISOString();
+          current = current.toString();
+          meals = await dbMealsHelepers.getMealsavailableReservations(current);
+        } else response.sendStatus(400);
         break;
     }
     response.json(meals);

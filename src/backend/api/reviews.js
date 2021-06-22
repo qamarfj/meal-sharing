@@ -6,7 +6,7 @@ const dbReviewsHeleper = require("../models/dbReviewsHelepers");
 
 router.get("/", async (request, response) => {
   try {
-    const reviews = await dbReviewsHeleper.getAllReviews();
+    const reviews = await dbReviewsHeleper.getAllReviews(request.query.meal_id);
     response.json(reviews);
   } catch (error) {
     response.status(400).json(error);
@@ -23,6 +23,7 @@ router.get("/:id", async (request, response) => {
 
 router.post("/", async (request, response) => {
   try {
+    request.body.created_date = new Date();
     const addedReview = await dbReviewsHeleper.addReview(request.body);
     response.json(addedReview);
   } catch (error) {

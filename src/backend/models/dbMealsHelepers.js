@@ -1,8 +1,14 @@
+const meals = require("../api/meals");
 const { select } = require("../database");
 const knex = require("../database");
 module.exports = {
   getAllMeals: async () => {
     return await knex("meals").select("*");
+  },
+  getMealByTitle: async (title) => {
+    return await knex("meals")
+      .select("*")
+      .where("title", "like", `% ${title}%`);
   },
   getMealById: async (id) => {
     return await knex("meals").select("*").where("id", "=", id);
@@ -20,8 +26,8 @@ module.exports = {
   getAllMealsByLimit: async (limit) => {
     return await knex("meals").limit(limit);
   },
-  getMealsavailableReservations: async () => {
-    return await knex
+  getMealsavailableReservations: async (current) => {
+    const meals = await knex
       .select("meals.*")
       .from("meals")
       .join(
@@ -35,11 +41,20 @@ module.exports = {
           .groupBy("meals.id")
           .as("M_R"),
         function () {
-          this.on("M_R.id", "=", "meals.id")
-            .andOn("meals.max_reservations", ">", "M_R.sum")
-            .andOn("meals.when", ">", Date.now());
+          this.on("meals.max_reservations", ">", "M_R.sum");
+          // this.on("M_R.id", "=", "meals.id").andOn(
+          //   "meals.max_reservations",
+          //   ">",
+          //   "M_R.sum"
+          // );
         }
       );
+    const mealsRes = meals.filter((meal) => {
+      const mealDate = meal.when;
+      const mealDateString = Number(mealDate);
+      return mealDateString > Date.parse(current);
+    });
+    return mealsRes;
   },
   addMeal: async (meal) => {
     const addedMealsId = await knex("meals").insert(meal);

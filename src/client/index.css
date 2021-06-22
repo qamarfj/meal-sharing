@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-@import 'theme.css';
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import "theme.css";
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   box-sizing: border-box;
 }
 
@@ -22,11 +22,6 @@ ul {
   margin: 0;
 }
 
-a {
-  text-decoration: none;
-  color: #2d3233;
-}
-
 button {
   background-color: #3e99c0;
   border-radius: 8px;
@@ -39,8 +34,11 @@ button {
 
 @media screen and (max-width: 1400px) {
   #root {
-    padding-left: 30%;
-    padding-right: 30%;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  .searchBar {
+    margin-left: 25em;
   }
 }
 
@@ -48,5 +46,8 @@ button {
   #root {
     padding-left: 0;
     padding-right: 0;
+  }
+  .searchBar {
+    margin-left: auto;
   }
 }
